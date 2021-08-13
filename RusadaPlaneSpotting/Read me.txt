@@ -1,0 +1,8 @@
+﻿How to set up system
+  - set Change server name in appsettings.json file
+  
+  - run migtation commands to create empty database  from Tools > Nudget Package Manager > Package Manager Console
+     1. add-migration init
+     2. update-database
+     this will create database
+

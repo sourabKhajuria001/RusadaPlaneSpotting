@@ -1,0 +1,71 @@
+﻿@model AircraftSightingModel
+@{
+    ViewData["Title"] = "Add new spotting";
+
+}
+
+<div class="container">
+    <h3 class=" display-5">Add new spotting</h3>
+
+    @if (ViewBag.isSuccess == true)
+    {
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        New record has been added successfully. <br />
+        Click <a asp-controller="AircraftSighting" asp-action="Details" asp-route-Id=@ViewBag.newRecordId>here</a> for details
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    }
+
+
+    <form method="post" asp-action="AddNewRecord" asp-controller="AircraftSighting"  enctype="multipart/form-data" novalidate>
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="form-row">
+
+            <div class="col">
+                <label asp-for="AircraftMake"></label>
+                <input asp-for="AircraftMake" class="form-control form-inline" />
+                <span asp-validation-for="AircraftMake" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <label asp-for="AircraftModel"></label>
+                <input asp-for="AircraftModel" class="form-control form-inline" />
+                <span asp-validation-for="AircraftModel" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col">
+                <label asp-for="AircraftRegistration"></label>
+                <input asp-for="AircraftRegistration" class="form-control" />
+                <span asp-validation-for="AircraftRegistration" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <label asp-for="LocationSpotted"></label>
+                <input asp-for="LocationSpotted" class="form-control" />
+                <span asp-validation-for="LocationSpotted" class="text-danger"></span>
+
+            </div>
+
+        </div>
+ 
+
+        <div class="form-group">
+            <label asp-for="Notes"></label>
+            <input asp-for="Notes" class="form-control" />
+            <span asp-validation-for="Notes" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-row">
+            <div class="col">
+                <input type="submit" class="btn btn-primary" value="Record new spotting" />
+                <input type="file" name="file" />
+            </div>
+            
+        </div>
+    </form>
+</div>
+

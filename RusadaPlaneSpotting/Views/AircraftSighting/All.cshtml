@@ -1,0 +1,97 @@
+﻿@model IEnumerable<AircraftSightingModel>
+@{
+    ViewData["Title"] = "All spottings";
+
+}
+
+<div class="container">
+    <h3 class="display-4">Total Records (@Model.Count()) </h3>
+
+    <div class="form-group form-inline">
+        <form asp-controller="AircraftSighting" asp-action="All">
+
+            <select class="form-control col-sm-4 mr-3" name="searchBy" asp-items=ViewBag.searchList>
+                <option>Search by</option>
+            </select>
+            <input class="form-control " id="searchid" name="searchstring" type="text" placeholder="Search..">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+
+
+    <div class="row">
+
+        
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Make</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">Reg</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Notes</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var _model in Model)
+                {
+
+                    <tr>
+
+                        <td>@_model.AircraftMake</td>
+                        <td>@_model.AircraftModel</td>
+                        <td>@_model.AircraftRegistration</td>
+                        <td>@_model.LocationSpotted</td>
+                        <td>@_model.Notes</td>
+
+                        <td>
+                            <div class="btn-group">
+                                <a asp-controller="AircraftSighting" asp-action="Details" asp-route-Id="@_model.Id" class="btn btn-sm btn-outline-secondary">View</a>
+                                <a asp-controller="AircraftSighting" asp-action="Update" asp-route-Id="@_model.Id" class="btn btn-sm btn-outline-primary">Edit</a>
+                                @*<a asp-controller="AircraftSighting" asp-action="Delete" asp-route-Id="@_model.Id" class="btn btn-sm btn-outline-danger">Delete</a>*@
+                                <a id="buttonID" class="btn btn-sm btn-outline-danger" data="@_model.Id" onclick="ConfirmDelete(@_model.Id)">Delete</a>
+                             </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+@section scripts{
+<script>
+    //$(document).ready(function () {
+    //     alert(" test ")
+
+
+    function ConfirmDelete(id) {
+        if (confirm('Are you sure you want to delete record?\nPress Ok to proceed.'))
+        
+        $.ajax({
+            type: "POST",
+            url: "AircraftSighting/Delete",
+            data: { id: id },
+            dataType: "text",
+            success: function (msg) {
+                alert("Deleted Successfully ");
+                window.location.reload();
+            },
+            error: function (req, status, error) {
+               alert(" Error deleting record ");
+            }
+        });
+
+    }
+
+    
+
+    
+
+  
+</script>
+}
+

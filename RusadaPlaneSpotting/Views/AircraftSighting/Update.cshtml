@@ -1,0 +1,69 @@
+﻿
+
+@model AircraftSightingModel
+@{
+    ViewData["Title"] = "Update Record";
+
+}
+
+<div class="container">
+    <h3 class=" display-5">Update Record</h3>
+     
+
+<form method="post" asp-controller="AircraftSighting" asp-action="UpdateRecord" asp-route-Id="@Model.Id" novalidate>
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="col">
+
+        @if(@Model.ImageLocation != null &&  @Model.ImageLocation != "" )
+        {
+        <img src="@Model.ImageLocation" class="rounded float-right" alt="@Model.ImageLocation" />
+        }
+         
+
+    </div>
+
+    <div class="form-row">
+
+        <div class="col col-sm-4">
+            <label asp-for="AircraftMake"></label>
+            <input asp-for="AircraftMake" class="form-control form-inline" />
+            <span asp-validation-for="AircraftMake" class="text-danger"></span>
+        </div>
+        <div class="col col-sm-4">
+            <label asp-for="AircraftModel"></label>
+            <input asp-for="AircraftModel" class="form-control form-inline" />
+            <span asp-validation-for="AircraftModel" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col col-sm-4">
+            <label asp-for="AircraftRegistration"></label>
+            <input asp-for="AircraftRegistration" class="form-control" />
+            <span asp-validation-for="AircraftRegistration" class="text-danger"></span>
+        </div>
+        <div class="col col-sm-4">
+            <label asp-for="LocationSpotted"></label>
+            <input asp-for="LocationSpotted" class="form-control" />
+            <span asp-validation-for="LocationSpotted" class="text-danger"></span>
+
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div class="col col-sm-8">
+            <label asp-for="Notes"></label>
+            <textarea asp-for="Notes" class="form-control"></textarea>
+            <span asp-validation-for="Notes" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group mt-3">
+        <input type="submit" class="btn btn-primary" value="Update Record" />
+        <input type="submit" class="btn btn-secondary" value="Cancel" asp-controller="AircraftSighting" asp-action="All" />
+    </div>
+
+</form>
+</div>

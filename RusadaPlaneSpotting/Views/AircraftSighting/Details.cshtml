@@ -1,0 +1,53 @@
+﻿
+
+@model AircraftSightingModel
+@{
+    ViewData["Title"] = "Details";
+
+}
+
+<div class="container">
+    <h3 class=" display-5">Details</h3>
+
+      
+
+    <form method="post" asp-controller="AircraftSighting" asp-action="Update" asp-route-Id="@Model.Id" novalidate>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="col">
+            @if(@Model.ImageLocation != null &&  @Model.ImageLocation != "" )
+            {
+            <img src="@Model.ImageLocation" class="rounded float-right" alt="image" />
+            }
+        </div>
+        <dl class="row">
+            <dt class="col-sm-3">Aircarft Make</dt>
+            <dd class="col-sm-9">@Model.AircraftMake</dd>
+
+            <dt class="col-sm-3">Aircarft Model</dt>
+            <dd class="col-sm-9"> @Model.AircraftModel </dd>
+
+            <dt class="col-sm-3">Registration</dt>
+            <dd class="col-sm-9">@Model.AircraftRegistration</dd>
+
+            <dt class="col-sm-3">Location Spotted</dt>
+            <dd class="col-sm-9"> @Model.LocationSpotted</dd>
+
+
+            <dt class="col-sm-3">Additional notes</dt>
+            <dd class="col-sm-9 flex-wrap"><p> @Model.Notes </p>  </dd>
+
+            <dt class="col-sm-3">Date Created</dt>
+            <dd class="col-sm-9"> @Model.DateCreated </dd>
+
+            <dt class="col-sm-3">Date Modified</dt>
+            <dd class="col-sm-9">@Model.DateModified</dd>
+        </dl>
+
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-secondary" value="Cancel" asp-controller="AircraftSighting" asp-action="All" />
+        </div>
+
+    </form>
+
+</div>
